@@ -11,3 +11,10 @@ In windows do the following:
 - also follow these instructions: https://sysguides.com/install-a-windows-11-virtual-machine-on-kvm
 
 Now boot using the [NixOS installer](https://nixos.org/download/#nixos-iso) and [follow the instructions](https://nixos.org/manual/nixos/stable/#sec-installation)
+
+
+
+
+```
+
+```
