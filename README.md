@@ -8,5 +8,6 @@ Instuctions for setting up a dual boot system.  The 2nd link is more useful:
 In windows do the following:
 - [disable Fast startup in Windows11](https://www.solveyourtech.com/how-to-disable-fast-startup-in-windows-11-a-step-by-step-guide/): `Control Panel > Hardware and Sound > Power Options > Choose what the power buttons do > Change settings that are currently unavailable` Uncheck `Turn on Fast Startup`, `Save changes`
 - Disable Secure Boot: enter BIOS `Security > Secure Boot` make sure it is set to `Disabled`, save and exit
+- also follow these instructions: https://sysguides.com/install-a-windows-11-virtual-machine-on-kvm
 
 Now boot using the [NixOS installer](https://nixos.org/download/#nixos-iso) and [follow the instructions](https://nixos.org/manual/nixos/stable/#sec-installation)
