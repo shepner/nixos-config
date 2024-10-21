@@ -1,0 +1,33 @@
+{ pkgs, ... }:
+{
+  basePackages = with pkgs; [
+    _1password
+    agenix
+    bat
+    binutils
+    curl
+    cyme
+    dig
+    dua
+    duf
+    eza
+    fd
+    file
+    git
+    jq
+    killall
+    nfs-utils
+    ntfs3g
+    pciutils
+    ripgrep
+    rsync
+    tpm2-tss
+    traceroute
+    tree
+    unzip
+    usbutils
+    vim
+    wget
+    yq-go
+  ];
+}

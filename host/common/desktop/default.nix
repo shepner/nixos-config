@@ -16,26 +16,26 @@ in
   ];
 
   # Enable Plymouth and surpress some logs by default.
-  #boot.plymouth.enable = true;
-  #boot.kernelParams = [
-  #  # The 'splash' arg is included by the plymouth option
-  #  "quiet"
-  #  "loglevel=3"
-  #  "rd.udev.log_priority=3"
-  #  "vt.global_cursor_default=0"
-  #];
+  boot.plymouth.enable = true;
+  boot.kernelParams = [
+    # The 'splash' arg is included by the plymouth option
+    "quiet"
+    "loglevel=3"
+    "rd.udev.log_priority=3"
+    "vt.global_cursor_default=0"
+  ];
 
   hardware.graphics.enable = true;
 
   # Enable location services
   location.provider = "geoclue2";
 
-  #programs = {
-  #  _1password-gui = {
-  #    enable = true;
-  #    polkitPolicyOwners = [ "jon" ];
-  #  };
-  #};
+  programs = {
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ "jon" ];
+    };
+  };
 
   fonts = {
     packages = with pkgs; [
