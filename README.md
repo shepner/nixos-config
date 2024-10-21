@@ -16,5 +16,5 @@ Now boot using the [NixOS installer](https://nixos.org/download/#nixos-iso) and 
 
 
 ```
-
+curl -fsSL https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/bootstrap.sh
 ```
