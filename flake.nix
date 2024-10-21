@@ -6,27 +6,27 @@
     master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "unstable";
+    #agenix.url = "github:ryantm/agenix";
+    #agenix.inputs.nixpkgs.follows = "unstable";
 
-    catppuccin.url = "github:catppuccin/nix";
+    #catppuccin.url = "github:catppuccin/nix";
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "unstable";
+    #disko.url = "github:nix-community/disko";
+    #disko.inputs.nixpkgs.follows = "unstable";
 
-    flypi.url = "github:jnsgruk/flypi";
+    #flypi.url = "github:jnsgruk/flypi";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "unstable";
+    #home-manager.url = "github:nix-community/home-manager";
+    #home-manager.inputs.nixpkgs.follows = "unstable";
 
-    lanzaboote.url = "github:nix-community/lanzaboote";
-    lanzaboote.inputs.nixpkgs.follows = "unstable";
+    #lanzaboote.url = "github:nix-community/lanzaboote";
+    #lanzaboote.inputs.nixpkgs.follows = "unstable";
 
-    libations.url = "github:jnsgruk/libations";
-    libations.inputs.nixpkgs.follows = "unstable";
+    #libations.url = "github:jnsgruk/libations";
+    #libations.inputs.nixpkgs.follows = "unstable";
 
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-    vscode-server.inputs.nixpkgs.follows = "unstable";
+    #vscode-server.url = "github:nix-community/nixos-vscode-server";
+    #vscode-server.inputs.nixpkgs.follows = "unstable";
   };
 
   outputs =
