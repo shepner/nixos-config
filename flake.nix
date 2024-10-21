@@ -1,32 +1,32 @@
 {
-  description = "nixos configuration";
+  description = "jnsgruk's nixos configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    #agenix.url = "github:ryantm/agenix";
-    #agenix.inputs.nixpkgs.follows = "unstable";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "unstable";
 
-    #catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix";
 
-    #disko.url = "github:nix-community/disko";
-    #disko.inputs.nixpkgs.follows = "unstable";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "unstable";
 
-    #flypi.url = "github:jnsgruk/flypi";
+    flypi.url = "github:jnsgruk/flypi";
 
-    #home-manager.url = "github:nix-community/home-manager";
-    #home-manager.inputs.nixpkgs.follows = "unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "unstable";
 
-    #lanzaboote.url = "github:nix-community/lanzaboote";
-    #lanzaboote.inputs.nixpkgs.follows = "unstable";
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote.inputs.nixpkgs.follows = "unstable";
 
-    #libations.url = "github:jnsgruk/libations";
-    #libations.inputs.nixpkgs.follows = "unstable";
+    libations.url = "github:jnsgruk/libations";
+    libations.inputs.nixpkgs.follows = "unstable";
 
-    #vscode-server.url = "github:nix-community/nixos-vscode-server";
-    #vscode-server.inputs.nixpkgs.follows = "unstable";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.inputs.nixpkgs.follows = "unstable";
   };
 
   outputs =
@@ -39,7 +39,7 @@
     let
       inherit (self) outputs;
       stateVersion = "24.05";
-      username = "shepner";
+      username = "jon";
 
       libx = import ./lib {
         inherit
@@ -52,12 +52,27 @@
       };
     in
     {
-      # nix build .#homeConfigurations."shepner@freyja".activationPackage
+      # nix build .#homeConfigurations."jon@freyja".activationPackage
       homeConfigurations = {
         # Desktop machines
         "${username}@freyja" = libx.mkHome {
           hostname = "freyja";
           desktop = "hyprland";
+        };
+        "${username}@kara" = libx.mkHome {
+          hostname = "kara";
+          desktop = "sway";
+        };
+        # Headless machines
+        "${username}@hugin" = libx.mkHome { hostname = "hugin"; };
+        "${username}@thor" = libx.mkHome { hostname = "thor"; };
+        "${username}@volnir" = libx.mkHome {
+          hostname = "volnir";
+          system = "aarch64-linux";
+        };
+        "ubuntu@dev" = libx.mkHome {
+          hostname = "dev";
+          user = "ubuntu";
         };
       };
 
@@ -67,6 +82,23 @@
         freyja = libx.mkHost {
           hostname = "freyja";
           desktop = "hyprland";
+        };
+        kara = libx.mkHost {
+          hostname = "kara";
+          desktop = "sway";
+        };
+        # Headless machines
+        hugin = libx.mkHost {
+          hostname = "hugin";
+          pkgsInput = nixpkgs;
+        };
+        thor = libx.mkHost {
+          hostname = "thor";
+          pkgsInput = nixpkgs;
+        };
+        volnir = libx.mkHost {
+          hostname = "volnir";
+          pkgsInput = nixpkgs;
         };
       };
 
