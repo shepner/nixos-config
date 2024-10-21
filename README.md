@@ -14,7 +14,8 @@ Now boot using the [NixOS installer](https://nixos.org/download/#nixos-iso) and 
 
 
 
+Run this to bootstrap the system configuration:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/bootstrap.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/bootstrap.sh)"
 ```
