@@ -49,6 +49,10 @@ sudo rsync -ah --progress /tmp/backed-up-boot /mnt/actual-boot
 sudo umount /mnt/actual-boot
 ```
 
+To fix NixOS, I ended up reinstalling
+
+To fix Windows, I followed these instructions: https://blog.rickychon.me/fixing-windows-bootloader-after-installing-linux-dual-boot
+
 ---
 
 Now boot using the [NixOS installer](https://nixos.org/download/#nixos-iso) and [follow the instructions](https://nixos.org/manual/nixos/stable/#sec-installation)
