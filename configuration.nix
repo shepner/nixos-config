@@ -85,17 +85,20 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed in system profile. To search, run `nix search wget`
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    wget
+    vim
+    git
+    obsidian
+    qemu
+    google-chrome
+    firefox
+    slack
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -105,6 +108,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
 
   # List services that you want to enable:
 
