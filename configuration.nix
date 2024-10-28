@@ -85,7 +85,6 @@
     ];
   };
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -94,6 +93,7 @@
     wget
     vim
     git
+    docker_27
     obsidian
     qemu
     google-chrome
@@ -108,7 +108,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
 
   # List services that you want to enable:
 
