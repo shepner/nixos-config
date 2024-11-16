@@ -101,6 +101,7 @@
     google-chrome
     firefox
     slack
+    cifs-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,7 +140,7 @@
 
   # https://nixos.wiki/wiki/Samba#Samba_Client
   # For mount.cifs, required unless domain name resolution is not needed.
-  environment.systemPackages = [ pkgs.cifs-utils ];
+  #environment.systemPackages = [ pkgs.cifs-utils ];
   fileSystems."/mnt/media" = {
     device = "//nas.asyla.org/media";
     fsType = "cifs";
