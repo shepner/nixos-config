@@ -1,18 +1,78 @@
+# This is your system's configuration file.
 # Run `nixos-rebuild switch` when changes have been made
 
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  # You can import other NixOS modules here
+  imports = [
+    # If you want to use modules your own flake exports (from modules/nixos):
+    # outputs.nixosModules.example
+
+    # Or modules from other flakes (such as nixos-hardware):
+    # inputs.hardware.nixosModules.common-cpu-amd
+    # inputs.hardware.nixosModules.common-ssd
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./users.nix
+
+    # Import your generated (nixos-generate-config) hardware configuration
+    ./hardware-configuration.nix
+  ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
     ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+    };
+  };
+
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
+    };
+    # Opinionated: disable channels
+    channel.enable = false;
+
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  };
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -77,18 +137,17 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.shepner = {
     isNormalUser = true;
     description = "Stephen Hepner";
     extraGroups = [ "networkmanager" "wheel" ];
+    openssh.authorizedKeys.keys = [
+      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+    ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run `nix search wget`
   environment.systemPackages = with pkgs; [
@@ -147,8 +206,6 @@
     options = let
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
-
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
   };
   # `/etc/nixos/smb-secrets` (domain is optional)
