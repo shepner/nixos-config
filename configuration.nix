@@ -3,10 +3,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -131,13 +131,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  
-  #fileSystems."/mnt/media" = {
-  #  device = "//nas.asyla.org/media";
-  #  fsType = "cifs";
-  #  options = [ "username=eddie" "password=yoursambapassword" "x-systemd.automount" "noauto" ];
-  #};
-
+    
   # https://nixos.wiki/wiki/Samba#Samba_Client
   # For mount.cifs, required unless domain name resolution is not needed.
   #environment.systemPackages = [ pkgs.cifs-utils ];
@@ -148,8 +142,6 @@
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-s
 ystemd.mount-timeout=5s";
-
-
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
   };
   # `/etc/nixos/smb-secrets` (domain is optional)
