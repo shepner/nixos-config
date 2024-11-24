@@ -27,8 +27,9 @@ if [ -f "$file" ]; then
   sudo mv "$file" "$file.1"
 fi
 
-# download the latest file
+# download the latest files
 sudo curl -o $CONFIGDIR/configuration.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/configuration.nix
+sudo curl -o $CONFIGDIR/pkgs.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/pkgs.nix
 
 # Apply new config
 sudo nixos-rebuild switch
