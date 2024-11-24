@@ -30,6 +30,8 @@ fi
 # download the latest files
 sudo curl -o $CONFIGDIR/configuration.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/configuration.nix
 sudo curl -o $CONFIGDIR/pkgs.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/pkgs.nix
+sudo curl -o $CONFIGDIR/users.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/users.nix
+sudo curl -o $CONFIGDIR/mount.nix https://raw.githubusercontent.com/shepner/nixos-config/refs/heads/main/mount.nix
 
 # Apply new config
 sudo nixos-rebuild switch
