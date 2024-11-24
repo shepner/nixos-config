@@ -6,14 +6,22 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./mount.nix
     ./pkgs.nix
+    ./users.nix
   ];
+
+  # Do not change this
+  # https://search.nixos.org/options?channel=24.05&show=system.stateVersion&from=0&size=50&sort=relevance&type=packages&query=system.stateVersion
+  system.stateVersion = "24.05";
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -25,8 +33,16 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+
   # Set your time zone.
   time.timeZone = "America/Chicago";
+
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -43,12 +59,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -75,18 +95,7 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.shepner = {
-    isNormalUser = true;
-    description = "Stephen Hepner";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-  };
+  
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -101,37 +110,6 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
-
-    
-  # https://nixos.wiki/wiki/Samba#Samba_Client
-  # For mount.cifs, required unless domain name resolution is not needed.
-  #environment.systemPackages = [ pkgs.cifs-utils ];
-  fileSystems."/mnt/media" = {
-    device = "//nas.asyla.org/media";
-    fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
-  };
-  # `/etc/nixos/smb-secrets` (domain is optional)
-  # ```
-  # username=<USERNAME>
-  # domain=<DOMAIN>
-  # password=<PASSWORD>
-  # ```
-
+  
+  
 }
