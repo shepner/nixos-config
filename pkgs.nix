@@ -18,5 +18,6 @@
     firefox
     slack
     cifs-utils
+    virt-manager
   ];
 }
