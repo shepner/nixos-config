@@ -8,16 +8,16 @@
   # List packages installed in system profile. To search, run `nix search wget`
 
   environment.systemPackages = with pkgs; [
+    cifs-utils
     wget
     vim
     git
     docker_27
     obsidian
-    qemu
     google-chrome
     firefox
     slack
-    cifs-utils
+    qemu
     virt-manager
   ];
 }
