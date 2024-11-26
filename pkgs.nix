@@ -12,6 +12,8 @@
     wget
     vim
     #
+    strawberry
+    #
     git
     sublime-merge
     #
