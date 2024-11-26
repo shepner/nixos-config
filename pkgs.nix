@@ -11,13 +11,18 @@
     cifs-utils
     wget
     vim
+    #
     git
+    sublime-merge
+    #
     docker_27
     obsidian
     google-chrome
     firefox
     slack
+    #
     qemu
+    libvirt
     virt-manager
   ];
 }
