@@ -17,11 +17,15 @@
     git
     sublime-merge
     #
-    docker_27
-    obsidian
+    bitwarden-desktop
+    #
     google-chrome
-    firefox
     slack
+    #
+    obsidian
+    firefox
+    #
+    docker_27
     #
     qemu
     libvirt
